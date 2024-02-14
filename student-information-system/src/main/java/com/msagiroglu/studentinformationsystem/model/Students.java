@@ -1,10 +1,13 @@
 package com.msagiroglu.studentinformationsystem.model;
 
+import java.util.Set;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,6 +32,9 @@ public class Students {
 
 	@Column(name = "password", nullable = false)
 	private String password;
+
+	@ManyToMany(mappedBy = "students")
+	private Set<Teachers> teachers;
 
 	public Students(String first_name, String last_name, String schoolNumber, String password) {
 		this.first_name = first_name;
