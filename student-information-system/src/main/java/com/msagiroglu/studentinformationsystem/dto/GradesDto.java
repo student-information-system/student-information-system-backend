@@ -14,4 +14,6 @@ public class GradesDto {
 	private Date date;
 	private Long studentId;
 	private Long courseId;
+	private String firstName;
+	private String lastName;
 }

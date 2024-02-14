@@ -15,7 +15,8 @@ public class GradesMapper {
 			return null;
 		}
 		return new GradesDto(grade.getGrade(), grade.getDate(), grade.getStudent().getStudent_id(),
-				grade.getCourse().getCourse_id());
+				grade.getCourse().getCourse_id(), grade.getStudent().getFirst_name(),
+				grade.getStudent().getLast_name());
 	}
 
 	public static Grades fromGradesDto(GradesDto dto, Students student, Courses course) {

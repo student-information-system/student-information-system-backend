@@ -3,6 +3,7 @@ package com.msagiroglu.studentinformationsystem.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,9 +23,12 @@ public class GradesService {
 	private final StudentsRepository studentsRepository;
 	private final CoursesRepository coursesRepository;
 
-	@Transactional(readOnly = true)
 	public List<Grades> findAllGrades() {
-		return gradesRepository.findAll();
+		List<Grades> grades = gradesRepository.findAll();
+		grades.forEach(grade -> {
+			Hibernate.initialize(grade.getStudent());
+		});
+		return grades;
 	}
 
 	@Transactional(readOnly = true)
@@ -49,6 +53,11 @@ public class GradesService {
 	@Transactional
 	public void deleteGrade(Long id) {
 		gradesRepository.deleteById(id);
+	}
+
+	@Transactional(readOnly = true)
+	public List<Grades> findGradesByTeacherId(Long teacherId) {
+		return gradesRepository.findByTeacherId(teacherId);
 	}
 
 }
