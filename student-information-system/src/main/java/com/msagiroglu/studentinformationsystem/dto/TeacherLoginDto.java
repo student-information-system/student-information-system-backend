@@ -4,13 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
-public class TeachersDto {
-	private Long teacherId;
-	private String firstName;
-	private String lastName;
+public class TeacherLoginDto {
 	private String email;
 	private String password;
 }
