@@ -22,10 +22,12 @@ public class SecurityConfig {
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		http.csrf().disable().authorizeHttpRequests((authz) -> authz
-				.requestMatchers("/teachers/**", "/courses/**", "/grades/**", "/students/**", "/teacher-auth/login/**")
-				.permitAll().anyRequest().authenticated()).sessionManagement()
-				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		http.csrf().disable()
+				.authorizeHttpRequests((authz) -> authz
+						.requestMatchers("/teachers/**", "/courses/**", "/grades/**", "/students/**",
+								"/teacher-auth/login/**", "/grades/my-grades**")
+						.permitAll().anyRequest().authenticated())
+				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().httpBasic();
 
 		return http.build();
 	}
