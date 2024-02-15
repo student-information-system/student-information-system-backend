@@ -7,6 +7,7 @@ import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.msagiroglu.studentinformationsystem.dto.GradesDto;
 import com.msagiroglu.studentinformationsystem.model.Courses;
 import com.msagiroglu.studentinformationsystem.model.Grades;
 import com.msagiroglu.studentinformationsystem.model.Students;
@@ -53,6 +54,18 @@ public class GradesService {
 	@Transactional
 	public void deleteGrade(Long id) {
 		gradesRepository.deleteById(id);
+	}
+
+	@Transactional
+	public Grades updateGrade(GradesDto gradeDto) {
+		Optional<Grades> existingGradeOpt = gradesRepository.findById(gradeDto.getGrade_id());
+		if (!existingGradeOpt.isPresent()) {
+			throw new RuntimeException("Grade not found with id: " + gradeDto.getGrade_id());
+		}
+		Grades existingGrade = existingGradeOpt.get();
+		existingGrade.setGrade(gradeDto.getGrade());
+		existingGrade.setDate(gradeDto.getDate());
+		return gradesRepository.save(existingGrade);
 	}
 
 	@Transactional(readOnly = true)

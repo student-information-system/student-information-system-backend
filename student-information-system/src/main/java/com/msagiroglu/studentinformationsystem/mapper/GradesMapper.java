@@ -14,7 +14,7 @@ public class GradesMapper {
 		if (grade == null) {
 			return null;
 		}
-		return new GradesDto(grade.getGrade(), grade.getDate(), grade.getStudent().getStudent_id(),
+		return new GradesDto(grade.getGrade_id(), grade.getGrade(), grade.getDate(), grade.getStudent().getStudent_id(),
 				grade.getCourse().getCourse_id(), grade.getStudent().getFirst_name(),
 				grade.getStudent().getLast_name());
 	}

@@ -1,7 +1,6 @@
 package com.msagiroglu.studentinformationsystem.controller;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
@@ -88,21 +87,8 @@ public class GradesController {
 
 	@PutMapping("/{id}")
 	public ResponseEntity<?> updateGrade(@PathVariable Long id, @RequestBody GradesDto gradesDto) {
-		Optional<Grades> existingGrade = gradesService.findGradeById(id);
-
-		if (!existingGrade.isPresent()) {
-			return ResponseEntity.notFound().build();
-		}
-
-		Grades gradeToUpdate = existingGrade.get();
-		gradeToUpdate.setGrade(gradesDto.getGrade());
-		try {
-			Grades updatedGrade = gradesService.saveGrade(gradeToUpdate, gradesDto.getStudentId(),
-					gradesDto.getCourseId());
-			return ResponseEntity.ok(GradesMapper.toGradesDto(updatedGrade));
-		} catch (RuntimeException e) {
-			String errorMessage = "Öğrenci veya ders bulunamadı.";
-			return ResponseEntity.badRequest().body(errorMessage);
-		}
+		gradesDto.setGrade_id(id);
+		Grades updatedGrade = gradesService.updateGrade(gradesDto);
+		return ResponseEntity.ok(GradesMapper.toGradesDto(updatedGrade));
 	}
 }
