@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class GradesDto {
+	private Long grade_id;
 	private Integer grade;
 	private Date date;
 	private Long studentId;

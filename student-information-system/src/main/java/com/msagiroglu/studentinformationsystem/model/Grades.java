@@ -27,7 +27,7 @@ public class Grades {
 	@Column(name = "grade", nullable = false)
 	private Integer grade;
 
-	@Column(name = "date", nullable = false)
+	@Column(name = "date")
 	private Date date;
 
 	@ManyToOne(fetch = FetchType.LAZY)
