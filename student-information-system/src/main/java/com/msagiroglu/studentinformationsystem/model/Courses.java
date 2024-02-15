@@ -20,10 +20,10 @@ public class Courses {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long course_id;
 
-	@Column(name = "name", nullable = false, length = 100)
+	@Column(name = "course_name", nullable = false, length = 100)
 	private String name;
 
-	@Column(name = "code", nullable = false, unique = true, length = 20)
+	@Column(name = "course_code", nullable = false, unique = true, length = 20)
 	private String code;
 
 	@ManyToOne
